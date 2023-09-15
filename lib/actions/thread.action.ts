@@ -8,7 +8,7 @@ import User from '../models/user.model'
 import Thread from '../models/thread.model'
 import Community from '../models/community.model'
 
-export async function fetchPosts(pageNumber = 1, pageSize = 20) {
+export const fetchPosts = async (pageNumber = 1, pageSize = 20) => {
   connectToDB()
 
   // Calculate the number of posts to skip based on the page number and page size.
@@ -55,8 +55,7 @@ interface Params {
   path: string,
 }
 
-export async function createThread({ text, author, communityId, path }: Params
-) {
+export const createThread = async ({ text, author, communityId, path }: Params) => {
   try {
     connectToDB()
 
@@ -89,7 +88,7 @@ export async function createThread({ text, author, communityId, path }: Params
   }
 }
 
-async function fetchAllChildThreads(threadId: string): Promise<any[]> {
+const fetchAllChildThreads = async (threadId: string): Promise<any[]> => {
   const childThreads = await Thread.find({ parentId: threadId })
 
   const descendantThreads = []
@@ -101,7 +100,7 @@ async function fetchAllChildThreads(threadId: string): Promise<any[]> {
   return descendantThreads
 }
 
-export async function deleteThread(id: string, path: string): Promise<void> {
+export const deleteThread = async (id: string, path: string): Promise<void> => {
   try {
     connectToDB()
 
@@ -157,7 +156,7 @@ export async function deleteThread(id: string, path: string): Promise<void> {
   }
 }
 
-export async function fetchThreadById(threadId: string) {
+export const fetchThreadById = async (threadId: string) => {
   connectToDB()
 
   try {
@@ -200,12 +199,12 @@ export async function fetchThreadById(threadId: string) {
   }
 }
 
-export async function addCommentToThread(
+export const addCommentToThread = async (
   threadId: string,
   commentText: string,
   userId: string,
   path: string
-) {
+) => {
   connectToDB()
 
   try {

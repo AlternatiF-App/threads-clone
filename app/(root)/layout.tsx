@@ -18,11 +18,11 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: {
   children: React.ReactNode
-}) {
+}) => {
   return (
     <ClerkProvider>
       <html lang="en">
@@ -45,3 +45,5 @@ export default function RootLayout({
     </ClerkProvider>
   )
 }
+
+export default RootLayout
